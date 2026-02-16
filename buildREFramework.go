@@ -20,7 +20,8 @@ const (
 )
 
 type Release struct {
-	TagName string `json:"tag_name"`
+	TagName     string    `json:"tag_name"`
+	PublishedAt time.Time `json:"published_at"`
 }
 
 type ProgressReader struct {
@@ -55,9 +56,11 @@ func main() {
 	}
 
 	var tag string
+	var pubDate time.Time
 	for _, r := range releases {
 		if strings.HasPrefix(r.TagName, "nightly-") {
 			tag = r.TagName
+			pubDate = r.PublishedAt
 			break
 		}
 	}
@@ -65,6 +68,36 @@ func main() {
 	if tag == "" {
 		fmt.Println("Error: Could not find the latest nightly tag.")
 		os.Exit(1)
+	}
+
+	// Calculate version and filename for pre-check
+	version := ""
+	versionRegex := regexp.MustCompile(`^nightly-\d+-[a-zA-Z0-9]{6}`)
+	version = versionRegex.FindString(tag)
+
+	if version == "" {
+		parts := strings.Split(tag, "-")
+		limit := 3
+		if len(parts) < limit {
+			limit = len(parts)
+		}
+		version = strings.Join(parts[:limit], "-")
+		if len(version) > 20 {
+			version = version[:20]
+		}
+	}
+
+	finalZip := fmt.Sprintf("REFramework_%s_%s.zip", version, pubDate.Format("02Jan06"))
+
+	if _, err := os.Stat(finalZip); err == nil {
+		fmt.Printf("==> Archive %s already exists.\n", finalZip)
+		fmt.Print("Do you want to rebuild it anyway? (y/N): ")
+		var confirm string
+		fmt.Scanln(&confirm)
+		if strings.ToLower(confirm) != "y" {
+			fmt.Println("==> Skipping rebuild. Exiting.")
+			os.Exit(0)
+		}
 	}
 
 	// 2. Downloading with progress
@@ -133,18 +166,6 @@ func main() {
 	}
 
 	// 5. Zipping
-	hash := ""
-	parts := strings.Split(tag, "-")
-	if len(parts) >= 3 {
-		hash = parts[2]
-		if len(hash) > 6 {
-			hash = hash[:6]
-		}
-	} else {
-		hash = "unknown"
-	}
-
-	finalZip := fmt.Sprintf("REFramework_%s_%s.zip", hash, time.Now().Format("02Jan06"))
 	fmt.Printf("==> Creating optimized archive: %s\n", finalZip)
 	if err := createZip(finalZip, extractDir); err != nil {
 		fmt.Printf("Error creating final zip: %v\n", err)
