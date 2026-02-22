@@ -1,14 +1,15 @@
 #!/bin/bash
-# build_gui_win.sh — Builds optimized Windows executables from WSL2/Linux
+# build_gui_win.sh — Builds all optimized executables from WSL2/Linux
 #
 # Requirements:
 #   sudo dnf install -y mingw64-gcc upx
 #   go install github.com/akavel/rsrc@latest
 #
 # Usage:
-#   ./build_gui_win.sh          # builds both GUI and CLI
+#   ./build_gui_win.sh          # builds GUI + CLI + Linux binary
 #   ./build_gui_win.sh gui      # builds GUI only
 #   ./build_gui_win.sh cli      # builds CLI only
+#   ./build_gui_win.sh linux    # builds Linux binary only
 
 set -euo pipefail
 
@@ -69,13 +70,35 @@ build_gui() {
   fi
 }
 
+build_linux() {
+  local BIN="buildREFramework"
+  echo "==> Building Linux: $BIN"
+
+  local before
+  go build \
+    -ldflags="-s -w" \
+    -o "$BIN" \
+    buildREFramework.go
+  before=$(build_size "$BIN")
+
+  upx --best "$BIN" >/dev/null
+  local after
+  after=$(build_size "$BIN")
+  echo "    Size: $before → $after"
+
+  if [ -d "$WIN_DL" ]; then
+    cp -v "$BIN" "$WIN_DL/"
+  fi
+}
+
 MODE="${1:-both}"
 
 case "$MODE" in
-  gui)  build_gui ;;
-  cli)  build_cli ;;
-  both) build_gui; echo ""; build_cli ;;
-  *)    echo "Usage: $0 [gui|cli|both]"; exit 1 ;;
+  gui)   build_gui ;;
+  cli)   build_cli ;;
+  linux) build_linux ;;
+  both)  build_gui; echo ""; build_cli; echo ""; build_linux ;;
+  *)     echo "Usage: $0 [gui|cli|linux|both]"; exit 1 ;;
 esac
 
 echo ""
