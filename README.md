@@ -12,11 +12,11 @@ A high-performance build system for REFramework (Monster Hunter Wilds) that auto
 - **GitHub API Integration**: Robust ETag caching to avoid rate limits.
 - **Archive Summaries**: Displays a detailed content list and file count after every build.
 
-### Windows-Native Tool (`.exe`)
-Specifically designed for Windows users who want to run the tool by double-clicking it from the File Explorer.
-- **Auto-Copy**: Automatically detects your Windows Downloads folder and offers to copy the resulting archive there.
-- **Explorer-Friendly**: Includes a "Press Enter to exit" prompt so the window remains open after completion.
-- Binary: `buildREFrameworkWin.exe`
+### Windows-Native Tools (`.exe`)
+We maintain two versions specifically for Windows users:
+- **GUI Version (`buildREFrameworkWinGUI.exe`)**: A stable visual experience using **Zenity native dialogs** and a **real-time progress bar**. No command prompt window appears.
+- **CLI Version (`buildREFrameworkWinCLI.exe`)**: A traditional terminal-based version with robust path handling and a "Press Enter to exit" prompt.
+- **Auto-Copy**: Both versions automatically detect your Windows Downloads folder and offer to copy the resulting archive there.
 
 ## Usage
 
