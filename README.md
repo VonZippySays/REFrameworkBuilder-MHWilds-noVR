@@ -25,16 +25,14 @@ We maintain two versions specifically for Windows users:
 2. Follow the on-screen prompts (Releases to show, version selection, copy to Downloads).
 3. The window will stay open until you press Enter.
 
-### Linux/WSL2 (Primary Build Script)
-This is the fastest and most efficient way to build using Go.
+### Linux/WSL2 (Go binary — fastest)
 ```bash
-./build.sh
+./go.sh
 ```
 
-### Alternative Build Script (Shell-based)
-Identical functionality implemented entirely in Bash.
+### Linux/WSL2 (Pure Shell fallback)
 ```bash
-./build_sh.sh
+./shell.sh
 ```
 
 ### Silent Mode
@@ -43,9 +41,9 @@ Run the entire pipeline without interactive prompts. This will:
 - Force a rebuild if the archive already exists.
 - Use the discovered Windows user/Downloads folder automatically.
 ```bash
-./build.sh -silent
+./go.sh -silent
 # OR
-./build_sh.sh -silent
+./shell.sh -silent
 
 # Windows Native
 ./buildREFrameworkWin.exe -silent (or set SILENT=1 env var)
@@ -63,7 +61,7 @@ The scripts support several environment variables for advanced users:
 
 | Implementation | Tool | Est. Build Time* |
 | :--- | :--- | :--- |
-| **Go (Streaming)** | `./build.sh` | **~1.5s** |
-| **Shell (RAM Disk)** | `./build_sh.sh` | **~1.8s** |
+| **Go (Streaming)** | `./go.sh` | **~1.5s** |
+| **Shell (RAM Disk)** | `./shell.sh` | **~1.8s** |
 
 *\*Times measured for a forced rebuild and copy operation on WSL2.*
