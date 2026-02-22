@@ -182,11 +182,23 @@ func main() {
 	if silent {
 		choice = 1
 		fmt.Printf("Silent Mode: Automatically chose numeric version 1 (%s)\n", items[0].Num)
+	} else if maxList == 1 && limit >= 1 {
+		choice = 1
+		fmt.Printf("Display limit is 1: Automatically selecting latest version (%s)\n", items[0].Num)
 	} else {
-		fmt.Printf("Choose numeric version (1-%d) [1]: ", limit)
-		_, err = fmt.Scanln(&choice)
-		if err != nil || choice < 1 || choice > limit {
+		fmt.Printf("Choose numeric version (1-%d) [1] (or 0 to exit): ", limit)
+		var input string
+		fmt.Scanln(&input)
+		if input == "" {
 			choice = 1
+		} else if input == "0" {
+			fmt.Println("Exiting as requested.")
+			os.Exit(2)
+		} else {
+			choice, _ = strconv.Atoi(input)
+			if choice < 1 || choice > limit {
+				choice = 1
+			}
 		}
 	}
 	sel := items[choice-1]

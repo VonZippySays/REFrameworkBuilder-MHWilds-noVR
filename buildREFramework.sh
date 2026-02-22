@@ -163,9 +163,17 @@ done <<< "${RELEASE_LIST//||/|}"
 if [ "${SILENT:-0}" == "1" ]; then
     choice=1
     echo "Silent Mode: Automatically chose numeric version 1 ($choice)"
+elif [ "$MAX_LIST" == "1" ] && [ "$idx" -ge 1 ]; then
+    choice=1
+    echo "Display limit is 1: Automatically selecting latest version ($choice)"
 else
-    read -p "Choose numeric version (1-$idx) [1]: " choice
+    read -p "Choose numeric version (1-$idx) [1] (or 0 to exit): " choice
     choice="${choice:-1}"
+fi
+
+if [ "$choice" == "0" ]; then
+    status "Exiting as requested."
+    exit 2
 fi
 
 if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "$idx" ]; then

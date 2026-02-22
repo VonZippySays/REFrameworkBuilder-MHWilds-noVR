@@ -9,17 +9,24 @@ for arg in "$@"; do
     fi
 done
 
-# Run the build process
-# The Go script (buildREFramework) will prompt for rebuild if the file already exists.
+# Run the build tool
 ./buildREFramework
+EXIT_CODE=$?
 
-# Identify the latest built archive
+if [ $EXIT_CODE -eq 2 ]; then
+    echo "==> Build cancelled by user. Exiting."
+    exit 0
+fi
+
+# Find the latest built archive
 LATEST_ZIP=$(ls -t REFramework_nightly-*.zip 2>/dev/null | head -n 1)
 
 if [ -z "$LATEST_ZIP" ]; then
-    echo "(!) Error: No REFramework_nightly-*.zip found to copy."
-    exit 1
+    echo "==> No archive found. Exiting gracefully."
+    exit 0
 fi
+
+echo "==> Found built archive: $LATEST_ZIP"
 
 # Discover Windows users
 USER_LIST=()

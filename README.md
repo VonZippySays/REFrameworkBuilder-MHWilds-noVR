@@ -12,10 +12,21 @@ A high-performance build system for REFramework (Monster Hunter Wilds) that auto
 - **GitHub API Integration**: Robust ETag caching to avoid rate limits.
 - **Archive Summaries**: Displays a detailed content list and file count after every build.
 
+### Windows-Native Tool (`.exe`)
+Specifically designed for Windows users who want to run the tool by double-clicking it from the File Explorer.
+- **Auto-Copy**: Automatically detects your Windows Downloads folder and offers to copy the resulting archive there.
+- **Explorer-Friendly**: Includes a "Press Enter to exit" prompt so the window remains open after completion.
+- Binary: `buildREFrameworkWin.exe`
+
 ## Usage
 
-### Primary Build Script (Go-based)
-This is the fastest and most efficient way to build.
+### Windows (Native Executable)
+1. Double-click `buildREFrameworkWin.exe` in the file explorer.
+2. Follow the on-screen prompts (Releases to show, version selection, copy to Downloads).
+3. The window will stay open until you press Enter.
+
+### Linux/WSL2 (Primary Build Script)
+This is the fastest and most efficient way to build using Go.
 ```bash
 ./build.sh
 ```
@@ -35,6 +46,9 @@ Run the entire pipeline without interactive prompts. This will:
 ./build.sh -silent
 # OR
 ./build_sh.sh -silent
+
+# Windows Native
+./buildREFrameworkWin.exe -silent (or set SILENT=1 env var)
 ```
 
 ## Configuration (Optional)

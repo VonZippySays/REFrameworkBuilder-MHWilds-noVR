@@ -68,7 +68,7 @@
         "state": "uploaded",
         "size": 13567415,
         "digest": "sha256:029677b4c99bf72941735b3c46b78a96dbf5a4a47509cca8d21202509eca4842",
-        "download_count": 836,
+        "download_count": 875,
         "created_at": "2026-02-20T21:49:07Z",
         "updated_at": "2026-02-20T21:49:08Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/DD2.zip"
@@ -104,7 +104,7 @@
         "state": "uploaded",
         "size": 13525577,
         "digest": "sha256:2c7a0a914808ed90f0040d6593698d1491f4fbb7bd05af9b5fdc948c9c285d8e",
-        "download_count": 384,
+        "download_count": 398,
         "created_at": "2026-02-20T21:49:06Z",
         "updated_at": "2026-02-20T21:49:07Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/DMC5.zip"
@@ -140,7 +140,7 @@
         "state": "uploaded",
         "size": 13565492,
         "digest": "sha256:e4061684822ca60dd84082c0792494c5f67acf57b84d1818a83b01a178ade2cf",
-        "download_count": 538,
+        "download_count": 560,
         "created_at": "2026-02-20T21:49:05Z",
         "updated_at": "2026-02-20T21:49:06Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/MHRISE.zip"
@@ -176,7 +176,7 @@
         "state": "uploaded",
         "size": 13582552,
         "digest": "sha256:6d14fed63a8866dd9ac955306a128f28de97c232fd0d95536730f8925f8d6097",
-        "download_count": 170,
+        "download_count": 175,
         "created_at": "2026-02-20T21:49:04Z",
         "updated_at": "2026-02-20T21:49:05Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/MHSTORIES3.zip"
@@ -212,7 +212,7 @@
         "state": "uploaded",
         "size": 13585102,
         "digest": "sha256:28634b3b526e9815a931a59744a32480efeb1cd799ab8884793c7e75b1f3b3e9",
-        "download_count": 14040,
+        "download_count": 14504,
         "created_at": "2026-02-20T21:49:03Z",
         "updated_at": "2026-02-20T21:49:04Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/MHWILDS.zip"
@@ -248,7 +248,7 @@
         "state": "uploaded",
         "size": 13576191,
         "digest": "sha256:dfe2a6c971097c566022f75a71f409f1629de2e5ce0254c5faa522dabcb7a8d3",
-        "download_count": 107,
+        "download_count": 110,
         "created_at": "2026-02-20T21:49:02Z",
         "updated_at": "2026-02-20T21:49:03Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/PRAGMATA.zip"
@@ -284,7 +284,7 @@
         "state": "uploaded",
         "size": 13596654,
         "digest": "sha256:7c54c472453f159fad416c2a322ba0eb8aa16c055c97540171ccc9ced7603e75",
-        "download_count": 1030,
+        "download_count": 1060,
         "created_at": "2026-02-20T21:49:01Z",
         "updated_at": "2026-02-20T21:49:02Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/RE2.zip"
@@ -320,7 +320,7 @@
         "state": "uploaded",
         "size": 13575420,
         "digest": "sha256:318bd026cfcacdfa4131f43b7a0a9dc0f33718250d77379da2054ce86bb47be1",
-        "download_count": 527,
+        "download_count": 549,
         "created_at": "2026-02-20T21:49:00Z",
         "updated_at": "2026-02-20T21:49:01Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/RE2_TDB66.zip"
@@ -356,7 +356,7 @@
         "state": "uploaded",
         "size": 13595640,
         "digest": "sha256:7dc54ca7d603b34eacdc239e721b02e984cd5b03f3062a5ad2bbf1b2e4037291",
-        "download_count": 548,
+        "download_count": 566,
         "created_at": "2026-02-20T21:48:59Z",
         "updated_at": "2026-02-20T21:49:00Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/RE3.zip"
@@ -392,7 +392,7 @@
         "state": "uploaded",
         "size": 13571833,
         "digest": "sha256:59882a8c365551de923a029d92fa3e4879d461ca1bef0ef2779b1400fea67112",
-        "download_count": 270,
+        "download_count": 276,
         "created_at": "2026-02-20T21:48:58Z",
         "updated_at": "2026-02-20T21:48:59Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/RE3_TDB67.zip"
@@ -428,7 +428,7 @@
         "state": "uploaded",
         "size": 13558471,
         "digest": "sha256:1f29e9687781c9de24c1c6b1dbe3410b08a1a3577262515fd620441b32068fdf",
-        "download_count": 2702,
+        "download_count": 2797,
         "created_at": "2026-02-20T21:48:57Z",
         "updated_at": "2026-02-20T21:48:58Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/RE4.zip"
@@ -464,7 +464,7 @@
         "state": "uploaded",
         "size": 13599649,
         "digest": "sha256:5e5484b94d72332005a8cf91d2b34a89e765ee9150b67948838e41a7f721cb85",
-        "download_count": 377,
+        "download_count": 386,
         "created_at": "2026-02-20T21:48:56Z",
         "updated_at": "2026-02-20T21:48:57Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/RE7.zip"
@@ -500,7 +500,7 @@
         "state": "uploaded",
         "size": 13569530,
         "digest": "sha256:ca8a4453180024c6161f25ebe76aec003d5a4de079db267c775d8dc9fd12d233",
-        "download_count": 102,
+        "download_count": 105,
         "created_at": "2026-02-20T21:48:55Z",
         "updated_at": "2026-02-20T21:48:56Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/RE7_TDB49.zip"
@@ -536,7 +536,7 @@
         "state": "uploaded",
         "size": 13615784,
         "digest": "sha256:3552f3f5248dcafce70eaa9122e7b8fba391fafcb9d48fac4f6caa7aaaaf11c6",
-        "download_count": 947,
+        "download_count": 971,
         "created_at": "2026-02-20T21:48:54Z",
         "updated_at": "2026-02-20T21:48:55Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/RE8.zip"
@@ -572,7 +572,7 @@
         "state": "uploaded",
         "size": 13553079,
         "digest": "sha256:79ed211ab63cabb17931b489f2ee8ad65f94e32a186edf2642ced3b87646543c",
-        "download_count": 177,
+        "download_count": 178,
         "created_at": "2026-02-20T21:48:53Z",
         "updated_at": "2026-02-20T21:48:54Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01230-b74c47648cb0042d8c353a494837ef78e77baf1b/SF6.zip"
@@ -663,7 +663,7 @@
         "state": "uploaded",
         "size": 13567411,
         "digest": "sha256:60f34cb913a38837b8527e0ce843c6cb875757f48bbf90d264c3d953148127ad",
-        "download_count": 1038,
+        "download_count": 1040,
         "created_at": "2026-02-19T05:24:24Z",
         "updated_at": "2026-02-19T05:24:25Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01229-d537aa60573b754edc137ba1183ba5e84fbdf063/DD2.zip"
@@ -807,7 +807,7 @@
         "state": "uploaded",
         "size": 13585104,
         "digest": "sha256:b1d1789b4b6df1f95ea07d446f5aae759dec0afde376177af16aa5cb284f3250",
-        "download_count": 20579,
+        "download_count": 20590,
         "created_at": "2026-02-19T05:24:21Z",
         "updated_at": "2026-02-19T05:24:21Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01229-d537aa60573b754edc137ba1183ba5e84fbdf063/MHWILDS.zip"
@@ -1023,7 +1023,7 @@
         "state": "uploaded",
         "size": 13558473,
         "digest": "sha256:b3ca3dc0ae802bee0cbf5e967d950f9b89ed86c55caf64574f55d1b9472bd962",
-        "download_count": 3101,
+        "download_count": 3102,
         "created_at": "2026-02-19T05:24:15Z",
         "updated_at": "2026-02-19T05:24:16Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01229-d537aa60573b754edc137ba1183ba5e84fbdf063/RE4.zip"
@@ -1131,7 +1131,7 @@
         "state": "uploaded",
         "size": 13615788,
         "digest": "sha256:45328600c654e4637d9ce9351891454ac93fb2e51b8867cacc9566a57033baae",
-        "download_count": 1061,
+        "download_count": 1063,
         "created_at": "2026-02-19T05:24:13Z",
         "updated_at": "2026-02-19T05:24:13Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01229-d537aa60573b754edc137ba1183ba5e84fbdf063/RE8.zip"
@@ -1402,7 +1402,7 @@
         "state": "uploaded",
         "size": 13585097,
         "digest": "sha256:9d6ad21938a6f627c82bf0fc3b1d34877a5bf8c342a561485643f86acb04f49f",
-        "download_count": 7309,
+        "download_count": 7316,
         "created_at": "2026-02-18T21:19:14Z",
         "updated_at": "2026-02-18T21:19:15Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01228-d294aa723f89bcf72625fb8497e548efd7cf95a8/MHWILDS.zip"
@@ -1997,7 +1997,7 @@
         "state": "uploaded",
         "size": 13589687,
         "digest": "sha256:8ee2a6537e68e70772c1cd4027ff6962fae955df4e7b34938cdd68280f3e863e",
-        "download_count": 17173,
+        "download_count": 17176,
         "created_at": "2026-02-14T06:06:15Z",
         "updated_at": "2026-02-14T06:06:16Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01227-6e28fb1f9aa3b7a37f175999d396b5a2cd4cb3fa/MHWILDS.zip"
@@ -2556,7 +2556,7 @@
         "state": "uploaded",
         "size": 13589682,
         "digest": "sha256:6d3b6153f24e205bca3ce93781b8a5136973c7ddd5024e7f83d18e5bfb6ab138",
-        "download_count": 162,
+        "download_count": 164,
         "created_at": "2026-02-14T05:35:15Z",
         "updated_at": "2026-02-14T05:35:16Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01226-86db69fdb5141173b48b62a6392eafa6fd7be2c4/MHWILDS.zip"
@@ -4089,7 +4089,7 @@
         "state": "uploaded",
         "size": 13564826,
         "digest": "sha256:5482312620521866b76d34661e8ce83509f9893bff5ea056a2ff0ad5aa850f9a",
-        "download_count": 1738,
+        "download_count": 1739,
         "created_at": "2026-02-08T17:44:11Z",
         "updated_at": "2026-02-08T17:44:11Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/DD2.zip"
@@ -4125,7 +4125,7 @@
         "state": "uploaded",
         "size": 13525150,
         "digest": "sha256:d849fec3caff0ad78afd8fd74be859a7b9829d5bfe2ec0aaa6aa1a1d068621ed",
-        "download_count": 806,
+        "download_count": 807,
         "created_at": "2026-02-08T17:44:09Z",
         "updated_at": "2026-02-08T17:44:10Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/DMC5.zip"
@@ -4161,7 +4161,7 @@
         "state": "uploaded",
         "size": 13565500,
         "digest": "sha256:538fbc90ba291cedae56b098ee976fddab2289b256718ff46111388947aa81af",
-        "download_count": 746,
+        "download_count": 747,
         "created_at": "2026-02-08T17:44:08Z",
         "updated_at": "2026-02-08T17:44:09Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/MHRISE.zip"
@@ -4197,7 +4197,7 @@
         "state": "uploaded",
         "size": 13584682,
         "digest": "sha256:c0351b71f69ba4447edec0f089d75b95238bc7c14fce60211564c11f29848d07",
-        "download_count": 8838,
+        "download_count": 8839,
         "created_at": "2026-02-08T17:44:07Z",
         "updated_at": "2026-02-08T17:44:08Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/MHWILDS.zip"
@@ -4233,7 +4233,7 @@
         "state": "uploaded",
         "size": 13572317,
         "digest": "sha256:a9092a88488804f9717fea873b088e7be08e2e40b57f4be3b40180970a3e3dfc",
-        "download_count": 165,
+        "download_count": 166,
         "created_at": "2026-02-08T17:44:06Z",
         "updated_at": "2026-02-08T17:44:07Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/PRAGMATA.zip"
@@ -4269,7 +4269,7 @@
         "state": "uploaded",
         "size": 13595085,
         "digest": "sha256:9ff6f1ad90cacd6990c8ca8857afaa9698a870435496f375baad7f2c7a2af467",
-        "download_count": 2074,
+        "download_count": 2075,
         "created_at": "2026-02-08T17:44:05Z",
         "updated_at": "2026-02-08T17:44:06Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/RE2.zip"
@@ -4305,7 +4305,7 @@
         "state": "uploaded",
         "size": 13573861,
         "digest": "sha256:20ffa090482cd01710d2d185f8c98706d711f5d10e2caea5a5c2f48f9db751f7",
-        "download_count": 1065,
+        "download_count": 1066,
         "created_at": "2026-02-08T17:44:04Z",
         "updated_at": "2026-02-08T17:44:05Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/RE2_TDB66.zip"
@@ -4341,7 +4341,7 @@
         "state": "uploaded",
         "size": 13594556,
         "digest": "sha256:274d7c6d29454c231e5a095c78c72a062d05651c6d18fa9a707bfb9c8b27351f",
-        "download_count": 1040,
+        "download_count": 1041,
         "created_at": "2026-02-08T17:44:03Z",
         "updated_at": "2026-02-08T17:44:04Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/RE3.zip"
@@ -4377,7 +4377,7 @@
         "state": "uploaded",
         "size": 13573661,
         "digest": "sha256:5f1c64533d4206731473789d5fc174963de55f17efeb86cc5ef9e3e6cc7facd1",
-        "download_count": 499,
+        "download_count": 500,
         "created_at": "2026-02-08T17:44:02Z",
         "updated_at": "2026-02-08T17:44:03Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/RE3_TDB67.zip"
@@ -4413,7 +4413,7 @@
         "state": "uploaded",
         "size": 13559136,
         "digest": "sha256:1caee2e20ef15063f915cf56f78aa8ef727b122a3dbea63cbf63658cc7386518",
-        "download_count": 9464,
+        "download_count": 9465,
         "created_at": "2026-02-08T17:44:01Z",
         "updated_at": "2026-02-08T17:44:02Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01218-c27a060b2e56f15d46b4b17fbe1e003d4625b657/RE4.zip"
@@ -7954,7 +7954,7 @@
         "state": "uploaded",
         "size": 13564346,
         "digest": "sha256:f0370a447d866a33af74dbeb8e815c285e29d8fd3de96c068307623b29c9ca61",
-        "download_count": 11612,
+        "download_count": 11613,
         "created_at": "2025-12-23T04:09:44Z",
         "updated_at": "2025-12-23T04:09:45Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01208-f91aba8c4300b55d0ec2a5f39d43580ebc0d0891/DD2.zip"
@@ -8062,7 +8062,7 @@
         "state": "uploaded",
         "size": 13586559,
         "digest": "sha256:4c29b2667e915b8c77e7e48bb1b111e7593f6a7ace1042f01551ed39c7531715",
-        "download_count": 109600,
+        "download_count": 109602,
         "created_at": "2025-12-23T04:09:41Z",
         "updated_at": "2025-12-23T04:09:42Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01208-f91aba8c4300b55d0ec2a5f39d43580ebc0d0891/MHWILDS.zip"
@@ -9631,7 +9631,7 @@
         "state": "uploaded",
         "size": 13561806,
         "digest": "sha256:6d16f120c8fe692be83e5acf4e190b18dd018b79ff43495e8487e50f0fb76234",
-        "download_count": 316,
+        "download_count": 318,
         "created_at": "2025-12-21T17:48:12Z",
         "updated_at": "2025-12-21T17:48:13Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01205-85cbbde7163cf2bfe33e644c1eda1d3ac1c601ce/DD2.zip"
@@ -9667,7 +9667,7 @@
         "state": "uploaded",
         "size": 13520624,
         "digest": "sha256:60eab8f4ef8b21315bf97a560bf78845607a36e20e56738f64145d88dde09801",
-        "download_count": 88,
+        "download_count": 89,
         "created_at": "2025-12-21T17:48:12Z",
         "updated_at": "2025-12-21T17:48:12Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01205-85cbbde7163cf2bfe33e644c1eda1d3ac1c601ce/DMC5.zip"
@@ -10298,7 +10298,7 @@
         "state": "uploaded",
         "size": 13574001,
         "digest": "sha256:fc4463fe5ef39698465587e0f62137cff8a3019d1dddc549496c1c1a088bc7e3",
-        "download_count": 70497,
+        "download_count": 70508,
         "created_at": "2025-12-14T21:43:19Z",
         "updated_at": "2025-12-14T21:43:20Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01204-322710259aab26a4c719c0ae9842098f72981366/MHWILDS.zip"
@@ -15636,7 +15636,7 @@
         "state": "uploaded",
         "size": 13552681,
         "digest": "sha256:05b359ce7c9de1e14964e8a25f09252b45b891c648f93e6a84b4cae6d0ab2129",
-        "download_count": 93291,
+        "download_count": 93292,
         "created_at": "2025-07-13T00:32:23Z",
         "updated_at": "2025-07-13T00:32:24Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01183-e2e7348ba45151242d1fc2e10bebfba0278f384f/MHWILDS.zip"
@@ -16087,7 +16087,7 @@
         "state": "uploaded",
         "size": 13735008,
         "digest": "sha256:239e86d16506122bd8e47ea0f4113491a79c01d3f1c3780205f6fe97b1be9b1d",
-        "download_count": 9572,
+        "download_count": 9574,
         "created_at": "2025-06-05T23:47:44Z",
         "updated_at": "2025-06-05T23:47:45Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01179-e4d00a5a774e1a1b64cce53023256129dbf18177/DMC5.zip"
@@ -27226,7 +27226,7 @@
         "state": "uploaded",
         "size": 13563510,
         "digest": null,
-        "download_count": 11,
+        "download_count": 12,
         "created_at": "2025-03-24T20:33:54Z",
         "updated_at": "2025-03-24T20:33:54Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01151-11df56883b31529c109c7029f5eacce083e6aaae/RE3_TDB67.zip"
@@ -28284,7 +28284,7 @@
         "state": "uploaded",
         "size": 13498858,
         "digest": null,
-        "download_count": 642,
+        "download_count": 643,
         "created_at": "2025-03-24T09:51:52Z",
         "updated_at": "2025-03-24T09:51:52Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01149-9f9d43a006ad3bc0a7f74ce71a6a5c5f739b4fe4/RE4.zip"
@@ -51874,7 +51874,7 @@
         "state": "uploaded",
         "size": 5288330,
         "digest": null,
-        "download_count": 26986,
+        "download_count": 26987,
         "created_at": "2025-03-02T01:16:45Z",
         "updated_at": "2025-03-02T01:16:45Z",
         "browser_download_url": "https://github.com/praydog/REFramework-nightly/releases/download/nightly-01073-e1f53ea8e85871b6b81a121b7c34928e569ca680/MHWILDS.zip"
