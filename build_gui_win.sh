@@ -1,39 +1,82 @@
 #!/bin/bash
-# build_gui_win.sh — Builds the optimized Windows GUI exe from WSL2/Linux
-# Requires: mingw64-gcc (dnf install mingw64-gcc), upx (dnf install upx)
+# build_gui_win.sh — Builds optimized Windows executables from WSL2/Linux
+#
+# Requirements:
+#   sudo dnf install -y mingw64-gcc upx
+#   go install github.com/akavel/rsrc@latest
+#
+# Usage:
+#   ./build_gui_win.sh          # builds both GUI and CLI
+#   ./build_gui_win.sh gui      # builds GUI only
+#   ./build_gui_win.sh cli      # builds CLI only
+
 set -euo pipefail
 
-EXE="buildREFrameworkWinGUI.exe"
-GOFILE="buildREFrameworkWinGUI.go"
+WIN_DL="/mnt/c/Users/Mike/Downloads"
+GOPATH_BIN="$(go env GOPATH)/bin"
 
-echo "==> Generating resources (manifest)..."
-"$(go env GOPATH)/bin/rsrc" -manifest app.manifest -o rsrc.syso
+build_size() {
+  local file="$1"
+  echo "$(du -sh "$file" | cut -f1)"
+}
 
-echo "==> Cross-compiling for Windows amd64 (stripped)..."
-CC=x86_64-w64-mingw32-gcc \
-  CGO_ENABLED=1 \
-  GOOS=windows \
-  GOARCH=amd64 \
-  go build \
-    -ldflags="-H windowsgui -s -w" \
+build_cli() {
+  local EXE="buildREFrameworkWinCLI.exe"
+  echo "==> Building CLI: $EXE"
+
+  local before
+  GOOS=windows GOARCH=amd64 go build \
+    -ldflags="-s -w" \
     -o "$EXE" \
-    "$GOFILE"
+    buildREFrameworkWinCLI.go
+  before=$(build_size "$EXE")
 
-BEFORE=$(stat -c%s "$EXE")
-echo "==> Compressing with UPX..."
-upx --best "$EXE"
-AFTER=$(stat -c%s "$EXE")
+  upx --best "$EXE" >/dev/null
+  local after
+  after=$(build_size "$EXE")
+  echo "    Size: $before → $after"
+
+  if [ -d "$WIN_DL" ]; then
+    cp -v "$EXE" "$WIN_DL/"
+  fi
+}
+
+build_gui() {
+  local EXE="buildREFrameworkWinGUI.exe"
+  echo "==> Building GUI: $EXE"
+
+  echo "    Generating resources (manifest)..."
+  "$GOPATH_BIN/rsrc" -manifest app.manifest -o rsrc.syso
+
+  local before
+  CC=x86_64-w64-mingw32-gcc \
+    CGO_ENABLED=1 \
+    GOOS=windows \
+    GOARCH=amd64 \
+    go build \
+      -ldflags="-H windowsgui -s -w" \
+      -o "$EXE" \
+      buildREFrameworkWinGUI.go
+  before=$(build_size "$EXE")
+
+  upx --best "$EXE" >/dev/null
+  local after
+  after=$(build_size "$EXE")
+  echo "    Size: $before → $after"
+
+  if [ -d "$WIN_DL" ]; then
+    cp -v "$EXE" "$WIN_DL/"
+  fi
+}
+
+MODE="${1:-both}"
+
+case "$MODE" in
+  gui)  build_gui ;;
+  cli)  build_cli ;;
+  both) build_gui; echo ""; build_cli ;;
+  *)    echo "Usage: $0 [gui|cli|both]"; exit 1 ;;
+esac
 
 echo ""
 echo "==> Done!"
-printf "    Size: %.1f MB → %.1f MB (%.0f%% reduction)\n" \
-  "$(echo "$BEFORE / 1048576" | bc -l)" \
-  "$(echo "$AFTER / 1048576" | bc -l)" \
-  "$(echo "scale=1; (1 - $AFTER / $BEFORE) * 100" | bc -l)"
-
-# Optional: copy to Windows Downloads
-WIN_DL="/mnt/c/Users/Mike/Downloads"
-if [ -d "$WIN_DL" ]; then
-  cp -v "$EXE" "$WIN_DL/"
-  echo "==> Copied to $WIN_DL"
-fi
