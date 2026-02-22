@@ -7,7 +7,6 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
@@ -54,16 +53,19 @@ func main() {
 			maxList = n
 		}
 	}
-	// If interactive terminal, prompt for MAX_LIST
-	if fi, _ := os.Stdin.Stat(); (fi.Mode() & os.ModeCharDevice) != 0 {
-		fmt.Printf("How many releases to display? [%d]: ", maxList)
-		var input string
-		fmt.Scanln(&input)
-		if input != "" {
-			if n, err := strconv.Atoi(input); err == nil && n > 0 {
-				maxList = n
-			} else {
-				fmt.Printf("Invalid number, using %d\n", maxList)
+	// If interactive terminal (and not silent), prompt for MAX_LIST
+	silent := os.Getenv("SILENT") == "1"
+	if !silent {
+		if fi, _ := os.Stdin.Stat(); (fi.Mode() & os.ModeCharDevice) != 0 {
+			fmt.Printf("How many releases to display? [%d]: ", maxList)
+			var input string
+			fmt.Scanln(&input)
+			if input != "" {
+				if n, err := strconv.Atoi(input); err == nil && n > 0 {
+					maxList = n
+				} else {
+					fmt.Printf("Invalid number, using %d\n", maxList)
+				}
 			}
 		}
 	}
@@ -87,17 +89,21 @@ func main() {
 	var releases []Release
 	if resp.StatusCode == http.StatusNotModified {
 		// Use cache
-		data, err := os.ReadFile(cacheBody)
+		f, err := os.Open(cacheBody)
 		if err != nil {
-			fmt.Printf("Error reading cache: %v\n", err)
+			fmt.Printf("Error opening cache: %v\n", err)
 			os.Exit(1)
 		}
-		if err := json.Unmarshal(data, &releases); err != nil {
+		defer f.Close()
+		if err := json.NewDecoder(f).Decode(&releases); err != nil {
 			fmt.Printf("Error parsing cached JSON: %v\n", err)
 			os.Exit(1)
 		}
 	} else if resp.StatusCode == http.StatusOK {
-		// Update cache
+		// Update cache while decoding
+		// Note: We need the raw bytes to write to cache, but we can decode simultaneously
+		// or just read all and then decode from buffer. Stream decoding from a TeeReader
+		// would be most efficient to cache and decode in one pass.
 		data, err := io.ReadAll(resp.Body)
 		if err != nil {
 			fmt.Printf("Error reading response: %v\n", err)
@@ -113,8 +119,9 @@ func main() {
 		}
 	} else {
 		// Fail if no cache, or use old cache if available
-		if data, err := os.ReadFile(cacheBody); err == nil {
-			json.Unmarshal(data, &releases)
+		if f, err := os.Open(cacheBody); err == nil {
+			defer f.Close()
+			json.NewDecoder(f).Decode(&releases)
 		} else {
 			fmt.Printf("Error: API returned status %d and no cache available.\n", resp.StatusCode)
 			os.Exit(1)
@@ -170,12 +177,17 @@ func main() {
 		fmt.Printf(" %d. %s  (%s)  %s\n", i+1, it.Num, it.Rel.TagName, it.Rel.PublishedAt.Format("2006-01-02 15:04:05"))
 	}
 
-	// Prompt selection
+	// Prompt selection if not in silent mode
 	var choice int
-	fmt.Printf("Choose numeric version (1-%d) [1]: ", limit)
-	_, err = fmt.Scanln(&choice)
-	if err != nil || choice < 1 || choice > limit {
+	if silent {
 		choice = 1
+		fmt.Printf("Silent Mode: Automatically chose numeric version 1 (%s)\n", items[0].Num)
+	} else {
+		fmt.Printf("Choose numeric version (1-%d) [1]: ", limit)
+		_, err = fmt.Scanln(&choice)
+		if err != nil || choice < 1 || choice > limit {
+			choice = 1
+		}
 	}
 	sel := items[choice-1]
 	tag = sel.Rel.TagName
@@ -196,12 +208,16 @@ func main() {
 
 	if _, err := os.Stat(finalZip); err == nil {
 		fmt.Printf("==> Archive %s already exists.\n", finalZip)
-		fmt.Print("Do you want to rebuild it anyway? (y/N): ")
-		var confirm string
-		fmt.Scanln(&confirm)
-		if strings.ToLower(confirm) != "y" {
-			fmt.Println("==> Skipping rebuild. Exiting.")
-			os.Exit(0)
+		if silent {
+			fmt.Println("Silent Mode: Rebuilding existing archive.")
+		} else {
+			fmt.Print("Do you want to rebuild it anyway? (y/N): ")
+			var confirm string
+			fmt.Scanln(&confirm)
+			if strings.ToLower(confirm) != "y" {
+				fmt.Println("==> Skipping rebuild. Exiting.")
+				os.Exit(0)
+			}
 		}
 	}
 
@@ -242,31 +258,15 @@ func main() {
 		os.Exit(1)
 	}
 
-	// 3. Unzipping with integrated filtering
-	// Use RAM disk if available for better performance
-	tmpRoot, err := os.MkdirTemp("/dev/shm", "reframework-*")
-	if err != nil {
-		tmpRoot, _ = os.MkdirTemp("", "reframework-*")
-	}
-	defer os.RemoveAll(tmpRoot)
-
-	extractDir := filepath.Join(tmpRoot, "MHWILDS")
-	fmt.Println("==> Extracting and filtering...")
-	// Patterns matching shell: -x "*RE*" "*vr*" "*xr*" "*VR*" "*XR*" "*DELETE*" "*OpenVR*" "*OpenXR*"
-	filters := []string{"RE", "vr", "xr", "VR", "XR", "DELETE", "OpenVR", "OpenXR"}
-	if err := unzipFiltered(zipName, extractDir, filters); err != nil {
-		fmt.Printf("Error unzipping: %v\n", err)
-		os.Exit(1)
-	}
-
-	// 5. Zipping
+	// 3. Zip-to-Zip Transcoding (Streaming)
 	fmt.Printf("==> Creating optimized archive: %s\n", finalZip)
-	if err := createZip(finalZip, extractDir); err != nil {
-		fmt.Printf("Error creating final zip: %v\n", err)
+	filters := []string{"RE", "vr", "xr", "VR", "XR", "DELETE", "OpenVR", "OpenXR"}
+	if err := transcodeZip(zipName, finalZip, filters); err != nil {
+		fmt.Printf("Error transcoding zip: %v\n", err)
 		os.Exit(1)
 	}
 
-	// 6. Final Cleanup
+	// Final Cleanup
 	os.Remove(zipName)
 
 	statusLine := fmt.Sprintf("==> Finished! Created: %s", finalZip)
@@ -288,15 +288,27 @@ func main() {
 	}
 }
 
-func unzipFiltered(src, dest string, filters []string) error {
-	r, err := zip.OpenReader(src)
+func transcodeZip(src, dest string, filters []string) error {
+	sReader, err := zip.OpenReader(src)
 	if err != nil {
 		return err
 	}
-	defer r.Close()
+	defer sReader.Close()
 
-	for _, f := range r.File {
-		// Filter out files matching any of the patterns (case-sensitive like shell unzip -x)
+	dFile, err := os.Create(dest)
+	if err != nil {
+		return err
+	}
+	defer dFile.Close()
+
+	dWriter := zip.NewWriter(dFile)
+	defer dWriter.Close()
+
+	// Ensure the root "MHWILDS/" directory entry exists
+	_, _ = dWriter.Create("MHWILDS/")
+
+	for _, f := range sReader.File {
+		// Filter out files matching any of the patterns
 		skip := false
 		for _, pattern := range filters {
 			if strings.Contains(f.Name, pattern) {
@@ -308,81 +320,30 @@ func unzipFiltered(src, dest string, filters []string) error {
 			continue
 		}
 
-		fpath := filepath.Join(dest, f.Name)
-		if !strings.HasPrefix(fpath, filepath.Clean(dest)+string(os.PathSeparator)) {
-			return fmt.Errorf("illegal file path: %s", fpath)
-		}
+		// Prepend "MHWILDS/" to the name for parity with shell script
+		zipPath := "MHWILDS/" + f.Name
 
-		if f.FileInfo().IsDir() {
-			os.MkdirAll(fpath, os.ModePerm)
-			continue
-		}
-
-		if err := os.MkdirAll(filepath.Dir(fpath), os.ModePerm); err != nil {
-			return err
-		}
-
-		outFile, err := os.OpenFile(fpath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, f.Mode())
+		// Direct stream from source entry to dest writer
+		srcFile, err := f.Open()
 		if err != nil {
 			return err
 		}
 
-		rc, err := f.Open()
+		destFile, err := dWriter.CreateHeader(&zip.FileHeader{
+			Name:     zipPath,
+			Method:   zip.Deflate,
+			Modified: f.Modified,
+		})
 		if err != nil {
-			outFile.Close()
+			srcFile.Close()
 			return err
 		}
 
-		_, err = io.Copy(outFile, rc)
-		outFile.Close()
-		rc.Close()
-
+		_, err = io.Copy(destFile, srcFile)
+		srcFile.Close()
 		if err != nil {
 			return err
 		}
 	}
 	return nil
-}
-
-func createZip(filename, sourceDir string) error {
-	newZipFile, err := os.Create(filename)
-	if err != nil {
-		return err
-	}
-	defer newZipFile.Close()
-
-	zipWriter := zip.NewWriter(newZipFile)
-	defer zipWriter.Close()
-
-	return filepath.Walk(sourceDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-
-		relPath, err := filepath.Rel(sourceDir, path)
-		if err != nil {
-			return err
-		}
-
-		// Maintain the "MHWILDS/" prefix in the final zip
-		zipPath := filepath.Join("MHWILDS", relPath)
-		if info.IsDir() {
-			_, err = zipWriter.Create(zipPath + "/")
-			return err
-		}
-
-		zipFile, err := zipWriter.Create(zipPath)
-		if err != nil {
-			return err
-		}
-
-		fsFile, err := os.Open(path)
-		if err != nil {
-			return err
-		}
-		defer fsFile.Close()
-
-		_, err = io.Copy(zipFile, fsFile)
-		return err
-	})
 }

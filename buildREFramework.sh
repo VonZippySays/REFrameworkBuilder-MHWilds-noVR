@@ -29,7 +29,8 @@ DEV_PREFIX="${DEV_PREFIX:-}"
 MAX_LIST="${MAX_LIST:-20}"
 
 # If running interactively, allow the user to change how many releases to display
-if [ -t 0 ]; then
+# Pass if SILENT=1
+if [ -t 0 ] && [ "${SILENT:-0}" != "1" ]; then
     read -p "How many releases to display? [${MAX_LIST}]: " USER_MAX
     if [[ -n "$USER_MAX" && "$USER_MAX" =~ ^[0-9]+$ ]] && [ "$USER_MAX" -gt 0 ]; then
         MAX_LIST="$USER_MAX"
@@ -159,8 +160,13 @@ while IFS='|' read -r num tag date disp; do
     idx=$((idx+1))
 done <<< "${RELEASE_LIST//||/|}"
 
-read -p "Choose numeric version (1-$idx) [1]: " choice
-choice="${choice:-1}"
+if [ "${SILENT:-0}" == "1" ]; then
+    choice=1
+    echo "Silent Mode: Automatically chose numeric version 1 ($choice)"
+else
+    read -p "Choose numeric version (1-$idx) [1]: " choice
+    choice="${choice:-1}"
+fi
 
 if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "$idx" ]; then
     echo "Invalid choice. Exiting."
@@ -195,10 +201,14 @@ fi
 
 if [ -f "$EXPECTED_ZIP" ]; then
     printf "\033[1;33m(!)\033[0m Archive %s already exists.\n" "$EXPECTED_ZIP"
-    read -p "Do you want to rebuild it anyway? (y/N): " confirm
-    if [[ ! $confirm =~ ^[Yy]$ ]]; then
-        status "Skipping rebuild. Exiting."
-        exit 0
+    if [ "${SILENT:-0}" == "1" ]; then
+        echo "Silent Mode: Rebuilding existing archive."
+    else
+        read -p "Do you want to rebuild it anyway? (y/N): " confirm
+        if [[ ! $confirm =~ ^[Yy]$ ]]; then
+            status "Skipping rebuild. Exiting."
+            exit 0
+        fi
     fi
 fi
 
@@ -230,4 +240,4 @@ status "Finished! Created: $EXPECTED_ZIP"
 # 5. Show summary of archive contents
 echo "Archive Summary ($EXPECTED_ZIP):"
 unzip -l "$EXPECTED_ZIP" | head -n -2 | tail -n +4 | awk '{print "  " $4}'
-echo "Total files: $(unzip -l "$EXPECTED_ZIP" | grep -c "MHWILDS/")"
+echo "Total files: $(unzip -l "$EXPECTED_ZIP" | head -n -2 | tail -n +4 | grep -v "/$" | wc -l)"
